@@ -2,13 +2,13 @@
   "name": "纪念周俊 | In Memory of Zhou Jun",
   "short_name": "周俊纪念页",
   "description": "一个用于纪念周俊的网页",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f5f5",
   "theme_color": "#8b7355",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }
