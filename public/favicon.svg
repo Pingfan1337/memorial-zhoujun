@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="flameGrad" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </radialGradient>
+  </defs>
+  <!-- Candle -->
+  <rect x="40" y="45" width="20" height="45" rx="2" fill="#f5f5f5"/>
+  <!-- Wick -->
+  <rect x="49" y="38" width="2" height="10" fill="#374151"/>
+  <!-- Flame -->
+  <path d="M50,10 Q62,25 55,38 Q70,28 50,10" fill="url(#flameGrad)"/>
+  <path d="M50,10 Q38,25 45,38 Q30,28 50,10" fill="url(#flameGrad)"/>
+</svg>

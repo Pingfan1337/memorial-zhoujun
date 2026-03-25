@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-memorial-bg text-memorial-text;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-amber-600/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-amber-600/60;
+  }
+}
+
+/* Component styles */
+@layer components {
+  .flame {
+    animation: flicker 0.8s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+    transform-box: fill-box;
+  }
+
+  @keyframes flicker {
+    0% {
+      transform: scale(1) rotate(-1deg);
+      opacity: 1;
+    }
+    25% {
+      transform: scale(1.02) rotate(1deg);
+      opacity: 0.95;
+    }
+    50% {
+      transform: scale(1.05) rotate(-0.5deg);
+      opacity: 0.9;
+    }
+    75% {
+      transform: scale(1.03) rotate(0.5deg);
+      opacity: 0.95;
+    }
+    100% {
+      transform: scale(1.08) rotate(-0.5deg);
+      opacity: 0.88;
+    }
+  }
+}
+
+/* Utility styles */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-orange-600;
+  }
+}

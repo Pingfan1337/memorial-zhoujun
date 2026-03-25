@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纪念周俊 | In Memory of Zhou Jun</title>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            /* 背景图片保持使用远程地址 */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1200/400') center center/cover no-repeat;
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .dates {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .photo-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .section {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #4a4a4a;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .memory-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .memory-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .memory-author {
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: right;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .candle {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .candle svg {
+            width: 100px;
+            height: 150px;
+            filter: drop-shadow(0 0 5px rgba(255,200,0,0.5));
+        }
+        
+        .flame {
+            animation: flicker 1s infinite alternate;
+            transform-origin: center bottom;
+        }
+        
+        @keyframes flicker {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.05); opacity: 0.9; }
+        }
+        
+        .quotes {
+            font-style: italic;
+            color: #666;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .gallery img {
+            width: 100%;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>周俊 | Zhou Jun</h1>
+            <div class="dates">2004 - 2025</div>
+            <p>永远怀念 | Forever Remembered</p>
+        </header>
+        
+        <div class="photo-container">
+            <!-- 使用本地个人照片 -->
+            <img src="img/zjx.jpg" alt="周俊照片" class="photo">
+        </div>
+        
+        <div class="quotes">
+            "逝者如斯，而未尝往也；不舍昼夜。" <br>
+            "Life flows away like water, never to return, continuously day and night."
+        </div>
+        
+        <div class="candle">
+            <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="flameGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" stop-color="#ffff00" />
+                        <stop offset="100%" stop-color="#ff6600" />
+                    </radialGradient>
+                </defs>
+                <rect x="40" y="50" width="20" height="80" fill="#f1f1f1" />
+                <path class="flame" d="M50,10 Q60,25 55,40 Q70,30 50,10" fill="url(#flameGradient)" />
+            </svg>
+        </div>
+        
+        <div class="section">
+            <h2>生平简介 | Biography</h2>
+            <p>周俊，一个充满活力、聪明才智和温暖的人。他总是乐于助人，对生活充满热情。他的离去让我们深感悲痛，但他的精神和记忆将永远活在我们心中。</p>
+            <p>Zhou Jun was a vibrant, intelligent, and warm-hearted person. He was always helpful and passionate about life. His passing brings us great sorrow, but his spirit and memory will forever live in our hearts.</p>
+        </div>
+        
+        <div class="section">
+            <h2>追思留言 | Tributes</h2>
+            <div class="memory-wall">
+                <div class="memory-card">
+                    <p>俊，我永远不会忘记你的笑容和善良。你的乐观精神一直激励着我。安息吧，我的朋友。</p>
+                    <div class="memory-author">— 平凡1337</div>
+                </div>
+                <div class="memory-card">
+                    <p>感谢你带给我们的所有美好记忆。你的智慧和幽默将永远被铭记。</p>
+                    <div class="memory-author">— gyc</div>
+                </div>
+                <div class="memory-card">
+                    <p>周俊是我见过的最有爱心的人之一。他总是不顾一切地帮助他人。我们都会想念他。</p>
+                    <div class="memory-author">— 周俊炮友</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>照片集 | Photo Gallery</h2>
+            <div class="gallery">
+                <!-- 使用本地照片集 -->
+                <img src="img/photo1.jpg" alt="照片1">
+                <img src="img/photo2.jpg" alt="照片2">
+                <img src="img/photo3.jpg" alt="照片3">
+                <img src="img/photo4.jpg" alt="照片4">
+                <img src="img/photo5.jpg" alt="照片5">
+                <img src="img/photo6.jpg" alt="照片6">
+            </div>
+        </div>
+        
+        <footer>
+            <p>此纪念页面于2025年创建 | This memorial page was created in 2025</p>
+            <p>若您有任何照片或故事想要分享，请与我们联系 | If you have any photos or stories to share, please contact us</p>
+        </footer>
+    </div>
+</body>
+</html>
