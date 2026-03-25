@@ -2,79 +2,966 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom base styles */
+:root {
+  color-scheme: light;
+  --paper: oklch(0.97 0.015 78);
+  --paper-deep: oklch(0.92 0.02 75);
+  --ink: oklch(0.29 0.03 35);
+  --ink-soft: oklch(0.48 0.025 40);
+  --accent: oklch(0.69 0.09 68);
+  --accent-deep: oklch(0.56 0.08 52);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-soft: 0 24px 60px rgba(85, 60, 35, 0.09);
+  --shadow-strong: 0 40px 120px rgba(73, 44, 24, 0.14);
+}
+
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-memorial-bg text-memorial-text;
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Noto Serif SC", serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at top left, oklch(0.94 0.035 80) 0%, transparent 36%),
+      radial-gradient(circle at 85% 15%, oklch(0.82 0.04 35 / 0.3) 0%, transparent 30%),
+      linear-gradient(180deg, oklch(0.985 0.006 85) 0%, var(--paper) 44%, oklch(0.94 0.012 75) 100%);
+    overflow-x: hidden;
   }
 
-  /* Custom scrollbar */
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 38%, white);
+  }
+
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-neutral-100;
+    background: color-mix(in oklab, var(--paper-deep) 44%, white);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-amber-600/40 rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-amber-600/60;
+    background: color-mix(in oklab, var(--accent-deep) 46%, white);
+    border-radius: 999px;
   }
 }
 
-/* Component styles */
-@layer components {
-  .flame {
-    animation: flicker 0.8s ease-in-out infinite alternate;
-    transform-origin: center bottom;
-    transform-box: fill-box;
-  }
+.site-chrome {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  @keyframes flicker {
-    0% {
-      transform: scale(1) rotate(-1deg);
-      opacity: 1;
-    }
-    25% {
-      transform: scale(1.02) rotate(1deg);
-      opacity: 0.95;
-    }
-    50% {
-      transform: scale(1.05) rotate(-0.5deg);
-      opacity: 0.9;
-    }
-    75% {
-      transform: scale(1.03) rotate(0.5deg);
-      opacity: 0.95;
-    }
-    100% {
-      transform: scale(1.08) rotate(-0.5deg);
-      opacity: 0.88;
-    }
+.site-chrome__veil,
+.site-chrome__grain {
+  position: absolute;
+  inset: 0;
+}
+
+.site-chrome__veil--left {
+  background:
+    radial-gradient(circle at 16% 10%, oklch(0.88 0.05 82 / 0.65), transparent 0 40%),
+    linear-gradient(140deg, oklch(0.97 0.03 78 / 0.35), transparent 68%);
+  transform: translate3d(calc(var(--pointer-x, 0) * -12px), calc(var(--scroll-shift, 0) * -18px), 0);
+}
+
+.site-chrome__veil--right {
+  background:
+    radial-gradient(circle at 80% 24%, oklch(0.87 0.045 28 / 0.4), transparent 0 34%),
+    linear-gradient(220deg, oklch(0.97 0.02 86 / 0.1), transparent 58%);
+  transform: translate3d(calc(var(--pointer-y, 0) * 10px), calc(var(--scroll-shift, 0) * 20px), 0);
+}
+
+.site-chrome__grain {
+  opacity: 0.22;
+  background-image:
+    linear-gradient(transparent 0 97%, rgba(90, 68, 48, 0.045) 97%),
+    linear-gradient(90deg, transparent 0 97%, rgba(90, 68, 48, 0.03) 97%);
+  background-size: 7px 7px, 7px 7px;
+  mix-blend-mode: multiply;
+}
+
+.memorial-page {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 40px 0 88px;
+}
+
+.hero,
+.section,
+.footer {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero {
+  min-height: min(920px, calc(100vh - 40px));
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+  gap: clamp(28px, 5vw, 68px);
+  align-items: center;
+  padding: clamp(42px, 7vw, 86px);
+  border-radius: 40px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 247, 0.84), rgba(249, 242, 234, 0.9)),
+    radial-gradient(circle at top right, rgba(255, 215, 162, 0.36), transparent 36%);
+  border: 1px solid rgba(143, 112, 78, 0.14);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+}
+
+.hero::before {
+  width: clamp(260px, 34vw, 420px);
+  height: clamp(260px, 34vw, 420px);
+  right: -10%;
+  top: -12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(248, 206, 143, 0.42) 0%, rgba(248, 206, 143, 0) 72%);
+  filter: blur(10px);
+}
+
+.hero::after {
+  inset: 24px;
+  border-radius: 32px;
+  border: 1px solid rgba(151, 121, 86, 0.08);
+}
+
+.js .hero__copy,
+.js .hero__portrait,
+.js .section__intro,
+.js .biography__copy,
+.js .biography__facets,
+.js .ritual__visual,
+.js .ritual__copy,
+.js .footer,
+.js .tribute-card,
+.js .gallery-card {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition:
+    opacity 720ms var(--ease-out-expo),
+    transform 720ms var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__eyebrow,
+.section__eyebrow,
+.gallery-dialog__eyebrow {
+  margin: 0 0 16px;
+  font-size: 0.84rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--accent-deep) 68%, white);
+}
+
+.hero__title,
+.section__title,
+.gallery-dialog__title {
+  margin: 0;
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.hero__title {
+  display: grid;
+  gap: 8px;
+  font-size: clamp(3.6rem, 11vw, 7rem);
+}
+
+.hero__title-cn,
+.hero__title-en {
+  display: block;
+}
+
+.hero__title-en {
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero__dates {
+  margin: 24px 0 20px;
+  font-size: 1rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.hero__quote {
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  line-height: 1.5;
+}
+
+.hero__quote-mark {
+  display: inline-block;
+  margin-right: 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5em;
+  color: color-mix(in oklab, var(--accent) 74%, white);
+}
+
+.hero__lede,
+.biography__copy p,
+.ritual__text,
+.ritual__status,
+.facet__text,
+.tribute-card__text,
+.footer p,
+.gallery-dialog__meta {
+  color: var(--ink-soft);
+  line-height: 1.9;
+}
+
+.hero__lede {
+  max-width: 56ch;
+  margin: 24px 0 0;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.memorial-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 999px;
+  color: oklch(0.23 0.03 35);
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--accent) 32%, white), color-mix(in oklab, var(--accent-deep) 22%, white));
+  box-shadow: 0 16px 30px rgba(137, 99, 55, 0.14);
+  transition:
+    transform 280ms var(--ease-out-quart),
+    box-shadow 280ms var(--ease-out-quart);
+}
+
+.memorial-button:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 22px 36px rgba(137, 99, 55, 0.18);
+}
+
+.memorial-button:active {
+  transform: translate3d(0, 1px, 0) scale(0.985);
+}
+
+.memorial-button:focus-visible,
+.gallery-card:focus-visible,
+.gallery-dialog__close:focus-visible,
+.footer__link:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--accent-deep) 75%, white);
+  outline-offset: 4px;
+}
+
+.memorial-button--ghost {
+  background: rgba(255, 252, 247, 0.52);
+  border: 1px solid rgba(137, 99, 55, 0.16);
+  box-shadow: none;
+}
+
+.memorial-button--wide {
+  min-width: min(100%, 260px);
+}
+
+.hero__portrait {
+  position: relative;
+  padding-left: clamp(12px, 4vw, 48px);
+}
+
+.hero__portrait-aura {
+  position: absolute;
+  inset: 12% 4% 10% auto;
+  width: clamp(240px, 30vw, 380px);
+  border-radius: 42% 58% 54% 46% / 40% 38% 62% 60%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 235, 206, 0.92), rgba(255, 235, 206, 0.06) 62%),
+    linear-gradient(135deg, rgba(255, 244, 227, 0.24), rgba(233, 201, 169, 0.1));
+  filter: blur(2px);
+  transform: translate3d(calc(var(--pointer-x, 0) * 10px), calc(var(--pointer-y, 0) * 12px), 0);
+}
+
+.hero__portrait-frame {
+  position: relative;
+  width: min(100%, 430px);
+  margin-left: auto;
+  padding: clamp(14px, 2.5vw, 22px);
+  border-radius: 38% 62% 50% 50% / 30% 34% 66% 70%;
+  background:
+    linear-gradient(145deg, rgba(255, 249, 242, 0.94), rgba(231, 216, 197, 0.7));
+  box-shadow: var(--shadow-strong);
+  transform: rotate(3deg) translate3d(calc(var(--pointer-x, 0) * 12px), calc(var(--pointer-y, 0) * -10px), 0);
+  transition: transform 400ms var(--ease-out-quart);
+}
+
+.hero__portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: inherit;
+  border: 1px solid rgba(145, 113, 84, 0.12);
+}
+
+.hero__image {
+  width: 100%;
+  aspect-ratio: 0.92;
+  object-fit: cover;
+  border-radius: inherit;
+  filter: saturate(0.92) contrast(1.03) sepia(0.08);
+}
+
+.hero__portrait-caption {
+  margin: 18px 0 0 auto;
+  width: fit-content;
+  padding-right: 8px;
+  font-size: 0.95rem;
+  color: color-mix(in oklab, var(--ink-soft) 82%, white);
+}
+
+.hero__ambient,
+.ritual__lights {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ambient-light,
+.released-light {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(255, 248, 231, 0.94) 0%, rgba(244, 205, 143, 0.68) 46%, rgba(244, 205, 143, 0) 72%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.ambient-light {
+  width: var(--size, 18px);
+  height: var(--size, 18px);
+  left: var(--left, 50%);
+  top: var(--top, 50%);
+  animation:
+    driftUp var(--duration, 12s) linear infinite,
+    pulseGlow calc(var(--duration, 12s) * 0.5) ease-in-out infinite alternate;
+  animation-delay: var(--delay, 0s);
+}
+
+.released-light {
+  width: var(--size, 22px);
+  height: var(--size, 22px);
+  left: var(--left, 50%);
+  bottom: 12%;
+  animation: releaseLight 2400ms var(--ease-out-expo) forwards;
+}
+
+.hero__scroll-note {
+  position: absolute;
+  left: clamp(28px, 7vw, 64px);
+  bottom: 32px;
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(110, 84, 62, 0.66);
+}
+
+.section {
+  padding: clamp(64px, 9vw, 120px) clamp(12px, 2vw, 24px) 0;
+}
+
+.section__intro {
+  max-width: 740px;
+  margin-bottom: clamp(30px, 4vw, 54px);
+}
+
+.section__title {
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 1;
+}
+
+.biography__layout,
+.ritual__layout {
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+.biography__layout {
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+}
+
+.biography__copy {
+  padding: clamp(24px, 4vw, 44px);
+  border-radius: 30px;
+  background: rgba(255, 251, 245, 0.72);
+  border: 1px solid rgba(140, 109, 75, 0.12);
+  box-shadow: 0 20px 48px rgba(88, 61, 38, 0.06);
+}
+
+.biography__lead {
+  margin-top: 0;
+  color: var(--ink);
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+}
+
+.biography__copy p:last-child,
+.facet:last-child .facet__text,
+.footer p:last-of-type {
+  margin-bottom: 0;
+}
+
+.biography__facets {
+  display: grid;
+  gap: 18px;
+  padding-top: clamp(14px, 2vw, 24px);
+}
+
+.facet {
+  padding: 24px;
+  border-left: 1px solid rgba(148, 113, 76, 0.2);
+  background: linear-gradient(135deg, rgba(255, 249, 241, 0.64), rgba(247, 238, 228, 0.28));
+}
+
+.facet__word {
+  margin: 0 0 10px;
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-size: 2rem;
+  color: var(--ink);
+}
+
+.facet__text {
+  margin: 0;
+}
+
+.ritual__layout {
+  grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.18fr);
+  position: relative;
+  padding: clamp(30px, 5vw, 56px);
+  border-radius: 38px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 248, 0.76), rgba(247, 239, 231, 0.92)),
+    radial-gradient(circle at 12% 24%, rgba(249, 225, 183, 0.38), transparent 32%);
+  border: 1px solid rgba(143, 112, 78, 0.12);
+  box-shadow: var(--shadow-soft);
+}
+
+.ritual__layout::after {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border-radius: 28px;
+  border: 1px solid rgba(143, 112, 78, 0.08);
+}
+
+.ritual__visual,
+.ritual__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.ritual__visual {
+  min-height: 340px;
+  display: grid;
+  place-items: center;
+}
+
+.ritual__halo {
+  position: absolute;
+  width: clamp(220px, 28vw, 340px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 203, 130, 0.44) 0%, rgba(246, 203, 130, 0) 68%);
+  filter: blur(4px);
+}
+
+.ritual__candle {
+  position: relative;
+  width: min(100%, 280px);
+  transform: translate3d(calc(var(--pointer-x, 0) * 8px), calc(var(--pointer-y, 0) * -6px), 0);
+}
+
+.candle-flame {
+  transform-origin: center 80px;
+  animation: candleFlicker 1.8s ease-in-out infinite alternate;
+}
+
+.ritual__text {
+  margin-bottom: 26px;
+  max-width: 56ch;
+}
+
+.ritual__status {
+  margin: 18px 0 0;
+  font-size: 0.96rem;
+}
+
+.tributes__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.tribute-card {
+  position: relative;
+  min-height: 220px;
+  padding: 28px 26px 24px;
+  border-radius: 28px;
+  background:
+    linear-gradient(155deg, rgba(255, 252, 247, 0.92), rgba(245, 236, 224, 0.64));
+  border: 1px solid rgba(143, 112, 78, 0.12);
+  box-shadow: 0 18px 36px rgba(92, 68, 43, 0.06);
+  overflow: hidden;
+  transform-origin: center bottom;
+  transition:
+    opacity 720ms var(--ease-out-expo),
+    transform 720ms var(--ease-out-expo),
+    box-shadow 320ms var(--ease-out-quart),
+    border-color 320ms var(--ease-out-quart);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.tribute-card:hover {
+  transform: translate3d(0, -6px, 0) rotate(-0.4deg);
+  box-shadow: 0 24px 44px rgba(92, 68, 43, 0.11);
+  border-color: rgba(143, 112, 78, 0.22);
+}
+
+.tribute-card:nth-child(1) {
+  grid-column: span 5;
+}
+
+.tribute-card:nth-child(2) {
+  grid-column: span 4;
+}
+
+.tribute-card:nth-child(3) {
+  grid-column: span 3;
+}
+
+.tribute-card::before {
+  content: "“";
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 4rem;
+  color: rgba(200, 159, 106, 0.24);
+}
+
+.tribute-card__text {
+  position: relative;
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.95;
+}
+
+.tribute-card__author {
+  margin: 18px 0 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: color-mix(in oklab, var(--accent-deep) 76%, white);
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.gallery-card {
+  position: relative;
+  grid-column: span 6;
+  min-height: 300px;
+  padding: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 1px solid rgba(143, 112, 78, 0.12);
+  box-shadow: 0 18px 40px rgba(92, 68, 43, 0.07);
+  background: rgba(255, 252, 247, 0.7);
+  transition:
+    opacity 720ms var(--ease-out-expo),
+    transform 720ms var(--ease-out-expo),
+    box-shadow 360ms var(--ease-out-quart),
+    border-color 360ms var(--ease-out-quart);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.gallery-card:nth-child(1) {
+  grid-column: span 7;
+  min-height: 400px;
+}
+
+.gallery-card:nth-child(2) {
+  grid-column: span 5;
+  min-height: 400px;
+}
+
+.gallery-card:nth-child(3) {
+  grid-column: span 5;
+  min-height: 320px;
+}
+
+.gallery-card:nth-child(4) {
+  grid-column: span 7;
+  min-height: 320px;
+}
+
+.gallery-card:hover {
+  transform: translate3d(0, -6px, 0);
+  box-shadow: 0 28px 52px rgba(92, 68, 43, 0.12);
+  border-color: rgba(143, 112, 78, 0.22);
+}
+
+.gallery-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform 800ms var(--ease-out-expo), filter 500ms var(--ease-out-quart);
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.gallery-card:hover .gallery-card__image {
+  transform: scale(1.08);
+  filter: saturate(1) contrast(1.05);
+}
+
+.gallery-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: end;
+  padding: 22px;
+  background:
+    linear-gradient(180deg, rgba(30, 23, 18, 0.02) 20%, rgba(30, 23, 18, 0.58) 100%);
+}
+
+.gallery-card__caption {
+  transform: translate3d(0, 12px, 0);
+  opacity: 0.84;
+  transition: transform 360ms var(--ease-out-quart), opacity 360ms var(--ease-out-quart);
+}
+
+.gallery-card:hover .gallery-card__caption {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+.gallery-card__label {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255, 244, 230, 0.72);
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.gallery-card__title {
+  margin: 0;
+  color: rgba(255, 248, 240, 0.96);
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-size: clamp(1.6rem, 2vw, 2.1rem);
+  line-height: 1.02;
+}
+
+.footer {
+  margin-top: clamp(64px, 8vw, 110px);
+  padding: clamp(30px, 4vw, 44px);
+  border-top: 1px solid rgba(143, 112, 78, 0.14);
+}
+
+.footer__link {
+  display: inline-block;
+  margin-top: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  color: color-mix(in oklab, var(--accent-deep) 72%, white);
+}
+
+.gallery-dialog {
+  padding: 0;
+  width: min(92vw, 980px);
+  border: none;
+  background: transparent;
+}
+
+.gallery-dialog::backdrop {
+  background: rgba(27, 18, 12, 0.58);
+  backdrop-filter: blur(10px);
+}
+
+.gallery-dialog__surface {
+  position: relative;
+  padding: 24px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, rgba(255, 252, 247, 0.96), rgba(245, 236, 224, 0.92));
+  box-shadow: 0 32px 80px rgba(20, 14, 10, 0.28);
+  border: 1px solid rgba(143, 112, 78, 0.14);
+}
+
+.gallery-dialog[open] .gallery-dialog__surface {
+  animation: dialogIn 380ms var(--ease-out-expo);
+}
+
+.gallery-dialog__close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.gallery-dialog__content {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+.gallery-dialog__image {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 24px;
+  background: rgba(252, 247, 240, 0.88);
+}
+
+.gallery-dialog__meta {
+  padding: 0 6px 6px;
+}
+
+@keyframes driftUp {
+  0% {
+    transform: translate3d(0, 24px, 0) scale(0.84);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.72;
+  }
+  100% {
+    transform: translate3d(var(--drift-x, 18px), -120px, 0) scale(1.12);
+    opacity: 0;
   }
 }
 
-/* Utility styles */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@keyframes pulseGlow {
+  0% {
+    filter: blur(0);
+  }
+  100% {
+    filter: blur(2px);
+  }
+}
+
+@keyframes candleFlicker {
+  0% {
+    transform: scale(0.98) rotate(-2deg);
+  }
+  40% {
+    transform: scale(1.02) rotate(1.2deg);
+  }
+  100% {
+    transform: scale(1.04) rotate(-1deg);
+  }
+}
+
+@keyframes releaseLight {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.8);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(var(--travel-x, 0), -300px, 0) scale(1.18);
+    opacity: 0;
+  }
+}
+
+@keyframes dialogIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (max-width: 980px) {
+  .memorial-page {
+    width: min(100% - 24px, 1000px);
+    padding-top: 12px;
   }
 
-  /* Glass morphism effect */
-  .glass {
-    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  .hero,
+  .biography__layout,
+  .ritual__layout {
+    grid-template-columns: 1fr;
   }
 
-  /* Gradient text */
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-orange-600;
+  .hero {
+    min-height: auto;
+    padding: 30px 22px 72px;
+  }
+
+  .hero__portrait {
+    padding-left: 0;
+  }
+
+  .hero__portrait-frame {
+    margin: 0 auto;
+  }
+
+  .hero__portrait-caption {
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 0;
+  }
+
+  .tribute-card:nth-child(n),
+  .gallery-card:nth-child(n) {
+    grid-column: span 12;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .memorial-page {
+    width: calc(100% - 16px);
+    padding-bottom: 56px;
+  }
+
+  .hero {
+    padding: 24px 18px 66px;
+    border-radius: 28px;
+  }
+
+  .hero__quote,
+  .hero__lede,
+  .biography__copy p,
+  .ritual__text,
+  .ritual__status {
+    line-height: 1.8;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .section {
+    padding-top: 56px;
+  }
+
+  .biography__copy,
+  .ritual__layout,
+  .gallery-dialog__surface {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .facet {
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero__copy,
+  .hero__portrait,
+  .section__intro,
+  .biography__copy,
+  .biography__facets,
+  .ritual__visual,
+  .ritual__copy,
+  .footer,
+  .tribute-card,
+  .gallery-card {
+    opacity: 1;
+    transform: none;
   }
 }

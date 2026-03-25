@@ -8,177 +8,177 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="manifest" href="manifest.json">
   <link rel="preload" as="image" href="img/zjx.jpg">
 </head>
-<body class="bg-memorial-bg text-memorial-text font-sans antialiased">
-  <div id="app" class="min-h-screen">
+<body>
+  <div class="site-chrome" aria-hidden="true">
+    <div class="site-chrome__veil site-chrome__veil--left"></div>
+    <div class="site-chrome__veil site-chrome__veil--right"></div>
+    <div class="site-chrome__grain"></div>
+  </div>
 
-    <header class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-b from-neutral-900/80 via-neutral-900/70 to-neutral-900/90"></div>
-
-      <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute top-20 left-10 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
-      </div>
-
-      <div class="relative z-10 text-center text-white px-6 animate-fade-in">
-        <h1 class="text-5xl md:text-7xl font-light tracking-wider mb-4">
-          <span class="block text-3xl md:text-4xl font-extralight tracking-widest opacity-80 mb-2">周俊</span>
-          <span class="block text-2xl md:text-3xl font-light tracking-[0.3em]">Zhou Jun</span>
+  <main class="memorial-page">
+    <header class="hero" id="top">
+      <div class="hero__copy" data-reveal>
+        <p class="hero__eyebrow">In Loving Memory</p>
+        <h1 class="hero__title">
+          <span class="hero__title-cn">周俊</span>
+          <span class="hero__title-en">Zhou Jun</span>
         </h1>
-        <div class="text-xl md:text-2xl font-light tracking-widest mt-6 text-white/70">
-          2004 — 2025
-        </div>
-        <p class="mt-6 text-lg font-light tracking-wide text-white/60 italic">
-          永远怀念 | Forever Remembered
+        <p class="hero__dates">2004 - 2025</p>
+        <blockquote class="hero__quote">
+          <span class="hero__quote-mark">“</span>
+          逝者如斯，而未尝往也；不舍昼夜。
+        </blockquote>
+        <p class="hero__lede">
+          让思念像微光一样，缓慢升起，安静地停留。愿他曾带来的温暖、明亮与善意，被时间温柔珍藏。
         </p>
-
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
+        <div class="hero__actions">
+          <a class="memorial-button memorial-button--ghost" href="#story">阅读追思</a>
+          <button class="memorial-button" id="release-light" type="button">点亮一盏心灯</button>
         </div>
       </div>
+
+      <figure class="hero__portrait" data-reveal>
+        <div class="hero__portrait-aura"></div>
+        <div class="hero__portrait-frame">
+          <img src="img/zjx.jpg" alt="周俊照片" class="hero__image" loading="eager">
+        </div>
+        <figcaption class="hero__portrait-caption">愿温柔、聪慧与明亮长留于此</figcaption>
+      </figure>
+
+      <div class="hero__ambient" id="ambient-field" aria-hidden="true"></div>
+      <p class="hero__scroll-note">向下阅读纪念</p>
     </header>
 
-    <section class="py-16 -mt-24 relative z-20">
-      <div class="max-w-4xl mx-auto px-6">
-        <div class="flex justify-center">
-          <div class="relative group">
-            <div class="absolute -inset-4 bg-gradient-to-r from-amber-500/30 via-orange-500/30 to-amber-500/30 rounded-full blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+    <section class="section biography" id="story">
+      <div class="section__intro" data-reveal>
+        <p class="section__eyebrow">Quiet Biography</p>
+        <h2 class="section__title">把一个人的光亮，写进时间里</h2>
+      </div>
 
-            <img
-              src="img/zjx.jpg"
-              alt="周俊照片"
-              class="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-white/20 shadow-2xl transform group-hover:scale-105 transition-transform duration-500"
-              loading="eager"
-            >
+      <div class="biography__layout">
+        <article class="biography__copy" data-reveal>
+          <p class="biography__lead">
+            周俊，一个充满活力、聪明才智和温暖的人。他总是乐于助人，对生活充满热情。
+          </p>
+          <p>
+            他的离去让我们深感悲痛，但那些真正打动人的部分并没有离开。那些愿意先伸出的手、认真倾听时的神情、让人放松下来的笑容，都还在许多人的记忆里继续发亮。
+          </p>
+          <p>
+            Zhou Jun was a vibrant, intelligent, and warm-hearted person. His passing brings great sorrow, yet the grace he offered others remains here, living quietly in the stories, gestures, and tenderness he left behind.
+          </p>
+        </article>
+
+        <aside class="biography__facets" data-reveal>
+          <div class="facet">
+            <p class="facet__word">善意</p>
+            <p class="facet__text">总愿意先关心别人，把温暖变成一种习惯。</p>
           </div>
-        </div>
+          <div class="facet">
+            <p class="facet__word">明朗</p>
+            <p class="facet__text">他让周围的人感觉轻一些，也更有勇气一些。</p>
+          </div>
+          <div class="facet">
+            <p class="facet__word">真诚</p>
+            <p class="facet__text">每一次陪伴都很真实，所以格外值得被记住。</p>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="py-12 bg-white/50 backdrop-blur-sm">
-      <div class="max-w-3xl mx-auto px-6 text-center">
-        <blockquote class="text-xl md:text-2xl font-light text-memorial-muted italic leading-relaxed">
-          <span class="block mb-4 text-3xl text-amber-600/40">"</span>
-          逝者如斯，而未尝往也；不舍昼夜。
-          <span class="block mt-4 text-base text-memorial-muted/70">
-            Life flows away like water, never to return, continuously day and night.
-          </span>
-        </blockquote>
-      </div>
-    </section>
-
-    <section class="py-16 bg-gradient-to-b from-white/50 to-transparent">
-      <div class="max-w-4xl mx-auto px-6">
-        <div class="flex justify-center">
-          <div class="candle-container relative" id="candle">
-            <svg class="w-24 h-36 md:w-28 md:h-40 drop-shadow-lg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+    <section class="section ritual">
+      <div class="ritual__layout">
+        <div class="ritual__visual" data-reveal>
+          <div class="ritual__halo"></div>
+          <div class="ritual__candle">
+            <svg viewBox="0 0 160 220" aria-hidden="true" focusable="false">
               <defs>
-                <radialGradient id="flameGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                  <stop offset="0%" stop-color="#fff7ed" />
-                  <stop offset="40%" stop-color="#fbbf24" />
-                  <stop offset="100%" stop-color="#f97316" />
+                <linearGradient id="candleBody" x1="0%" x2="100%">
+                  <stop offset="0%" stop-color="#f6efe6"></stop>
+                  <stop offset="45%" stop-color="#fffbf6"></stop>
+                  <stop offset="100%" stop-color="#e5d5c4"></stop>
+                </linearGradient>
+                <radialGradient id="candleFlame" cx="50%" cy="40%" r="60%">
+                  <stop offset="0%" stop-color="#fff4d4"></stop>
+                  <stop offset="40%" stop-color="#f7c873"></stop>
+                  <stop offset="100%" stop-color="#cb6d2d"></stop>
                 </radialGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <filter id="candleGlow" x="-100%" y="-100%" width="300%" height="300%">
+                  <feGaussianBlur stdDeviation="8" result="soft"></feGaussianBlur>
                   <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
+                    <feMergeNode in="soft"></feMergeNode>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
                   </feMerge>
                 </filter>
               </defs>
 
-              <rect x="35" y="55" width="30" height="85" rx="2" fill="linear-gradient(90deg, #f5f5f5 0%, #e5e5e5 50%, #f5f5f5 100%)"/>
-              <rect x="35" y="55" width="30" height="85" rx="2" fill="#f8f8f8"/>
-
-              <rect x="49" y="45" width="2" height="15" fill="#1f1f1f"/>
-
-              <g filter="url(#glow)" class="flame">
-                <path
-                  d="M50,15 Q65,30 58,42 Q72,35 50,15"
-                  fill="url(#flameGradient)"
-                />
-                <path
-                  d="M50,15 Q35,30 42,42 Q28,35 50,15"
-                  fill="url(#flameGradient)"
-                />
+              <g class="candle-flame" filter="url(#candleGlow)">
+                <path d="M79 30 C95 55, 98 74, 80 92 C58 75, 62 52, 79 30 Z" fill="url(#candleFlame)"></path>
+                <path d="M80 49 C89 64, 90 73, 80 82 C68 72, 71 61, 80 49 Z" fill="#fff7e6" opacity="0.8"></path>
               </g>
+
+              <ellipse cx="80" cy="112" rx="34" ry="10" fill="#d8bf99" opacity="0.3"></ellipse>
+              <rect x="48" y="110" width="64" height="88" rx="14" fill="url(#candleBody)"></rect>
+              <rect x="74" y="90" width="4" height="24" rx="2" fill="#53443c"></rect>
+              <path d="M48 128 C62 122, 88 124, 112 118" fill="none" stroke="#e7d7c4" stroke-width="4" opacity="0.8"></path>
+              <path d="M48 153 C64 148, 87 150, 112 144" fill="none" stroke="#e8dbcb" stroke-width="4" opacity="0.6"></path>
             </svg>
-
-            <div class="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl -z-10 animate-pulse"></div>
           </div>
         </div>
-        <p class="text-center text-memorial-muted/60 mt-6 text-sm italic">愿逝者安息</p>
-      </div>
-    </section>
 
-    <section class="py-20">
-      <div class="max-w-4xl mx-auto px-6">
-        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 backdrop-blur-sm border border-memorial-border/50 transform hover:shadow-2xl transition-shadow duration-500">
-          <h2 class="text-2xl md:text-3xl font-light tracking-wider text-memorial-text mb-8 pb-4 border-b border-memorial-border">
-            <span class="text-amber-600 mr-3">✦</span>
-            生平简介 | Biography
-          </h2>
-
-          <div class="space-y-6 text-lg font-light leading-relaxed text-memorial-muted">
-            <p class="transform hover:translate-x-2 transition-transform duration-300">
-              周俊，一个充满活力、聪明才智和温暖的人。他总是乐于助人，对生活充满热情。他的离去让我们深感悲痛，但他的精神和记忆将永远活在我们心中。
-            </p>
-            <p class="transform hover:translate-x-2 transition-transform duration-300">
-              Zhou Jun was a vibrant, intelligent, and warm-hearted person. He was always helpful and passionate about life. His passing brings us great sorrow, but his spirit and memory will forever live in our hearts.
-            </p>
-          </div>
+        <div class="ritual__copy" data-reveal>
+          <p class="section__eyebrow">Ritual of Light</p>
+          <h2 class="section__title">愿思念有一处柔软的落点</h2>
+          <p class="ritual__text">
+            这不是喧闹的效果，而是一种安静的回应。点击下方按钮，会有一束柔光从烛火旁升起，像一声轻轻的问候。
+          </p>
+          <button class="memorial-button memorial-button--wide" id="release-light-secondary" type="button">送上一束思念</button>
+          <p class="ritual__status" id="ritual-status" aria-live="polite">每次点击，都会放飞一束柔和的光。</p>
         </div>
       </div>
+      <div class="ritual__lights" id="light-rail" aria-hidden="true"></div>
     </section>
 
-    <section class="py-20 bg-gradient-to-b from-transparent via-amber-50/30 to-transparent">
-      <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-2xl md:text-3xl font-light tracking-wider text-memorial-text mb-12 text-center">
-          <span class="text-amber-600 mr-3">✦</span>
-          追思留言 | Tributes
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tributes">
-        </div>
+    <section class="section tributes">
+      <div class="section__intro" data-reveal>
+        <p class="section__eyebrow">Tributes</p>
+        <h2 class="section__title">被记住的，不只是名字，还有留下来的温度</h2>
       </div>
+      <div class="tributes__grid" id="tributes"></div>
     </section>
 
-    <section class="py-20">
-      <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-2xl md:text-3xl font-light tracking-wider text-memorial-text mb-12 text-center">
-          <span class="text-amber-600 mr-3">✦</span>
-          照片集 | Photo Gallery
-        </h2>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6" id="gallery">
-        </div>
+    <section class="section gallery">
+      <div class="section__intro" data-reveal>
+        <p class="section__eyebrow">Photo Album</p>
+        <h2 class="section__title">让时光停留在这些温柔的瞬间</h2>
       </div>
+      <div class="gallery__grid" id="gallery"></div>
     </section>
 
-    <footer class="py-12 bg-neutral-900 text-white/60">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <div class="mb-6">
-          <svg class="w-8 h-8 mx-auto text-amber-500/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-          </svg>
-        </div>
-        <p class="text-sm font-light tracking-wide">
-          此纪念页面于 2025 年创建 | This memorial page was created in 2025
-        </p>
-        <p class="text-xs mt-3 text-white/40">
-          若您有任何照片或故事想要分享，请与我们联系<br>
-          If you have any photos or stories to share, please contact us
-        </p>
-      </div>
+    <footer class="footer" data-reveal>
+      <p>此纪念页面于 2025 年创建 | This memorial page was created in 2025</p>
+      <p>若你也想补充照片或故事，这里永远欢迎新的光。</p>
+      <a href="#top" class="footer__link">回到页首</a>
     </footer>
-  </div>
+  </main>
+
+  <dialog class="gallery-dialog" id="gallery-dialog">
+    <form method="dialog" class="gallery-dialog__surface">
+      <button class="gallery-dialog__close" id="gallery-close" type="submit" aria-label="关闭照片预览">×</button>
+      <div class="gallery-dialog__content">
+        <img id="gallery-dialog-image" alt="" class="gallery-dialog__image">
+        <div class="gallery-dialog__meta">
+          <p class="gallery-dialog__eyebrow" id="gallery-dialog-label">Photo Memory</p>
+          <h3 class="gallery-dialog__title" id="gallery-dialog-title"></h3>
+        </div>
+      </div>
+    </form>
+  </dialog>
 
   <script type="module" src="./src/main.js"></script>
 </body>
