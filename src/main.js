@@ -1,5 +1,8 @@
 import './style.css'
 
+// Base path for GitHub Pages subdirectory
+const BASE_PATH = '/memorial-zhoujun'
+
 // Tribute data
 const tributes = [
   {
@@ -18,10 +21,10 @@ const tributes = [
 
 // Gallery data
 const galleryImages = [
-  { src: 'img/photo1.jpg', alt: '周俊与友人' },
-  { src: 'img/photo2.jpg', alt: '珍贵回忆' },
-  { src: 'img/photo3.jpg', alt: '美好时光' },
-  { src: 'img/photo4.jpg', alt: '纪念照片' }
+  { src: `${BASE_PATH}/img/photo1.jpg`, alt: '周俊与友人' },
+  { src: `${BASE_PATH}/img/photo2.jpg`, alt: '珍贵回忆' },
+  { src: `${BASE_PATH}/img/photo3.jpg`, alt: '美好时光' },
+  { src: `${BASE_PATH}/img/photo4.jpg`, alt: '纪念照片' }
 ]
 
 // Render tributes

@@ -1,5 +1,5 @@
 export default {
-  base: './',
+  base: '/memorial-zhoujun/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets'
