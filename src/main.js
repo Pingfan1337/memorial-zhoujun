@@ -44,7 +44,9 @@ const galleryImages = [
   }
 ]
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const prefersReducedMotion = typeof window.matchMedia === 'function'
+  ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  : false
 
 function renderTributes() {
   const container = document.getElementById('tributes')
@@ -91,7 +93,7 @@ function setupRevealObserver() {
   const revealItems = document.querySelectorAll('[data-reveal]')
   if (!revealItems.length) return
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     revealItems.forEach((item) => item.classList.add('is-visible'))
     return
   }
@@ -216,7 +218,12 @@ function setupGalleryDialog() {
   const label = document.getElementById('gallery-dialog-label')
   const closeButton = document.getElementById('gallery-close')
 
-  if (!(dialog instanceof HTMLDialogElement) || !image || !title || !label) {
+  const supportsDialog =
+    typeof HTMLDialogElement !== 'undefined' &&
+    dialog instanceof HTMLDialogElement &&
+    typeof dialog.showModal === 'function'
+
+  if (!supportsDialog || !image || !title || !label) {
     return
   }
 
@@ -261,4 +268,10 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSceneMotion()
   setupRitualButtons()
   setupGalleryDialog()
+
+  window.setTimeout(() => {
+    document.querySelectorAll('[data-reveal]').forEach((item) => {
+      item.classList.add('is-visible')
+    })
+  }, 1400)
 })

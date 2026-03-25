@@ -169,8 +169,6 @@
   border: 1px solid rgba(151, 121, 86, 0.08);
 }
 
-.js .hero__copy,
-.js .hero__portrait,
 .js .section__intro,
 .js .biography__copy,
 .js .biography__facets,
@@ -195,6 +193,7 @@
 .hero__copy {
   position: relative;
   z-index: 2;
+  animation: heroTextIn 880ms var(--ease-out-expo) both;
 }
 
 .hero__eyebrow,
@@ -327,6 +326,8 @@
 .hero__portrait {
   position: relative;
   padding-left: clamp(12px, 4vw, 48px);
+  animation: heroPortraitIn 1100ms var(--ease-out-expo) both;
+  animation-delay: 120ms;
 }
 
 .hero__portrait-aura {
@@ -859,6 +860,28 @@
   }
 }
 
+@keyframes heroTextIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroPortraitIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 34px, 0) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 @media (max-width: 980px) {
   .memorial-page {
     width: min(100% - 24px, 1000px);
@@ -952,7 +975,6 @@
   }
 
   .hero__copy,
-  .hero__portrait,
   .section__intro,
   .biography__copy,
   .biography__facets,
@@ -963,5 +985,10 @@
   .gallery-card {
     opacity: 1;
     transform: none;
+  }
+
+  .hero__copy,
+  .hero__portrait {
+    animation: none;
   }
 }

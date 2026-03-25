@@ -1,0 +1,28 @@
+(function(){const n=document.createElement("link").relList;if(n&&n.supports&&n.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))s(r);new MutationObserver(r=>{for(const o of r)if(o.type==="childList")for(const l of o.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&s(l)}).observe(document,{childList:!0,subtree:!0});function t(r){const o={};return r.integrity&&(o.integrity=r.integrity),r.referrerPolicy&&(o.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?o.credentials="include":r.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function s(r){if(r.ep)return;r.ep=!0;const o=t(r);fetch(r.href,o)}})();document.documentElement.classList.add("js");const m=[{text:"俊，我永远不会忘记你的笑容和善良。你的乐观精神一直激励着我。安息吧，我的朋友。",author:"平凡1337"},{text:"感谢你带给我们的所有美好记忆。你的智慧和幽默将永远被铭记。",author:"gyc"},{text:"周俊是我见过的最有爱心的人之一。他总是不顾一切地帮助他人。我们都会想念他。",author:"朋友"}],u=[{src:"img/photo1.jpg",alt:"周俊与友人",label:"Shared Laughter",title:"在笑声里留下的片段"},{src:"img/photo2.jpg",alt:"珍贵回忆",label:"Quiet Warmth",title:"平静而珍贵的温度"},{src:"img/photo3.jpg",alt:"美好时光",label:"Golden Time",title:"被时光轻轻照亮的日子"},{src:"img/photo4.jpg",alt:"纪念照片",label:"Gentle Memory",title:"留在心里的柔和影像"}],d=typeof window.matchMedia=="function"?window.matchMedia("(prefers-reduced-motion: reduce)").matches:!1;function g(){const e=document.getElementById("tributes");e&&(e.innerHTML=m.map((n,t)=>`
+    <article class="tribute-card" data-reveal style="--reveal-delay: ${t*110}ms;">
+      <p class="tribute-card__text">${n.text}</p>
+      <p class="tribute-card__author">- ${n.author}</p>
+    </article>
+  `).join(""))}function p(){const e=document.getElementById("gallery");e&&(e.innerHTML=u.map((n,t)=>`
+    <button
+      class="gallery-card"
+      type="button"
+      data-reveal
+      data-gallery-index="${t}"
+      aria-label="查看照片：${n.title}"
+      style="--reveal-delay: ${t*120}ms;"
+    >
+      <img
+        src="${n.src}"
+        alt="${n.alt}"
+        loading="lazy"
+        class="gallery-card__image"
+      >
+      <span class="gallery-card__overlay">
+        <span class="gallery-card__caption">
+          <span class="gallery-card__label">${n.label}</span>
+          <span class="gallery-card__title">${n.title}</span>
+        </span>
+      </span>
+    </button>
+  `).join(""))}function y(){const e=document.querySelectorAll("[data-reveal]");if(!e.length)return;if(d||!("IntersectionObserver"in window)){e.forEach(t=>t.classList.add("is-visible"));return}const n=new IntersectionObserver(t=>{t.forEach(s=>{s.isIntersecting&&(s.target.classList.add("is-visible"),window.setTimeout(()=>{s.target.style.removeProperty("--reveal-delay")},820),n.unobserve(s.target))})},{threshold:.14,rootMargin:"0px 0px -8% 0px"});e.forEach(t=>n.observe(t))}function f(){if(d)return;const e=document.getElementById("ambient-field");if(!e)return;Array.from({length:12},(t,s)=>{const r=document.createElement("span");return r.className="ambient-light",r.style.setProperty("--left",`${8+Math.random()*84}%`),r.style.setProperty("--top",`${6+Math.random()*80}%`),r.style.setProperty("--size",`${10+Math.random()*18}px`),r.style.setProperty("--duration",`${10+Math.random()*8}s`),r.style.setProperty("--delay",`${-s*1.1}s`),r.style.setProperty("--drift-x",`${-18+Math.random()*36}px`),r}).forEach(t=>e.appendChild(t))}function h(){if(d)return;const e=document.documentElement,n=document.querySelector(".hero");if(!n)return;let t=0;const s=o=>{t&&cancelAnimationFrame(t),t=requestAnimationFrame(()=>{const l=n.getBoundingClientRect(),a=((o.clientX-l.left)/l.width-.5)*2,c=((o.clientY-l.top)/l.height-.5)*2;e.style.setProperty("--pointer-x",a.toFixed(3)),e.style.setProperty("--pointer-y",c.toFixed(3))})},r=()=>{const o=Math.min(window.scrollY/900,1);e.style.setProperty("--scroll-shift",o.toFixed(3))};n.addEventListener("pointermove",s),window.addEventListener("scroll",r,{passive:!0}),r()}function b(){const e=document.getElementById("light-rail"),n=document.getElementById("ritual-status");if(!e)return;const t=document.createElement("span");t.className="released-light",t.style.setProperty("--left",`${42+Math.random()*16}%`),t.style.setProperty("--size",`${18+Math.random()*18}px`),t.style.setProperty("--travel-x",`${-80+Math.random()*160}px`),e.appendChild(t),window.setTimeout(()=>{t.remove()},2600),n&&(n.textContent="一束柔光已经升起，愿思念被温柔接住。")}function E(){const e=[document.getElementById("release-light"),document.getElementById("release-light-secondary")].filter(Boolean);e.length&&e.forEach(n=>{n.addEventListener("click",()=>{if(d){const t=document.getElementById("ritual-status");t&&(t.textContent="愿这份思念，安静地停留在这里。");return}b()})})}function v(){const e=document.getElementById("gallery-dialog"),n=document.getElementById("gallery-dialog-image"),t=document.getElementById("gallery-dialog-title"),s=document.getElementById("gallery-dialog-label"),r=document.getElementById("gallery-close");!(typeof HTMLDialogElement<"u"&&e instanceof HTMLDialogElement&&typeof e.showModal=="function")||!n||!t||!s||(document.addEventListener("click",l=>{const a=l.target instanceof Element?l.target.closest("[data-gallery-index]"):null;if(!a)return;const c=Number(a.getAttribute("data-gallery-index")),i=u[c];i&&(n.src=i.src,n.alt=i.alt,t.textContent=i.title,s.textContent=i.label,e.showModal())}),r==null||r.addEventListener("click",()=>{e.close()}),e.addEventListener("click",l=>{const a=e.getBoundingClientRect();(l.clientX<a.left||l.clientX>a.right||l.clientY<a.top||l.clientY>a.bottom)&&e.close()}))}document.addEventListener("DOMContentLoaded",()=>{g(),p(),y(),f(),h(),E(),v(),window.setTimeout(()=>{document.querySelectorAll("[data-reveal]").forEach(e=>{e.classList.add("is-visible")})},1400)});
